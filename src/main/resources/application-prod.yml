@@ -1,0 +1,23 @@
+# Perfil Seguro de Produccion
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/biblioteca_db}
+    username: ${DB_USER:prod_user}
+    password: ${DB_PASSWORD:changeme}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false
+
+# Documentacion OpenAPI / Swagger-UI: BLOQUEADA en produccion (superficie de ataque eliminada)
+springdoc:
+  api-docs:
+    enabled: false   # Bloquea la descarga de la especificacion tecnica
+  swagger-ui:
+    enabled: false    # Devuelve 404 ante intentos de acceso a la consola web
+
+logging:
+  level:
+    com.biblioteca: INFO
